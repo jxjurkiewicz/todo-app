@@ -1,7 +1,32 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Header from "./Header";
 import Task from "./Task";
 
 const App = () => {
+  const [tasks, setTasks] = useState([]);
+
+  useEffect(() => {
+    const getTasks = async () => {
+      const tasksFromApi = await fetchTasks();
+
+      setTasks(tasksFromApi);
+    };
+
+    getTasks();
+  }, []);
+
+  const fetchTasks = async () => {
+    const res = await fetch(
+      "https://todo-app-4f75b-default-rtdb.europe-west1.firebasedatabase.app/tasks.json"
+    );
+
+    const data = await res.json();
+
+    return data;
+  };
+
   return (
     <div className="bg-white p-5 max-w-3xl mx-auto rounded-lg min-h-52">
       <Header />
@@ -16,9 +41,9 @@ const App = () => {
         <button className="w-[8%] border border-black">+</button>
       </div>
 
-      <Task title="Create new project in React" />
-
-      <Task title="Buy a new laptop" />
+      {tasks.map((task) => (
+        <Task text={task.text} key={task.id} />
+      ))}
     </div>
   );
 };
