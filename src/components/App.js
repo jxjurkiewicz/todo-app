@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Header from "./Header";
 import Task from "./Task";
+import AddTask from "./AddTask";
 
 const App = () => {
   const [tasks, setTasks] = useState([]);
@@ -27,23 +28,55 @@ const App = () => {
     return data;
   };
 
+  const addTask = async (task) => {
+    await fetch(
+      "https://todo-app-4f75b-default-rtdb.europe-west1.firebasedatabase.app/tasks.json",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(task),
+      }
+    );
+
+    const updatedTasks = await fetchTasks();
+
+    setTasks(updatedTasks);
+  };
+
+  const deleteTask = async (taskId) => {
+    const taskKey = Object.keys(tasks).find((key) => tasks[key].id === taskId);
+    if (taskKey) {
+      await fetch(
+        `https://todo-app-4f75b-default-rtdb.europe-west1.firebasedatabase.app/tasks/${taskKey}.json`,
+        {
+          method: "DELETE",
+        }
+      );
+    }
+
+    const updatedTasks = await fetchTasks();
+
+    setTasks(updatedTasks);
+  };
+
   return (
-    <div className="bg-white p-5 max-w-3xl mx-auto rounded-lg min-h-52">
+    <div className="bg-white p-5 max-w-3xl mx-auto rounded-lg min-h-52 shadow-xl">
       <Header />
 
-      <div className="flex gap-4 mb-10">
-        <input
-          className="border border-black w-[92%] p-4"
-          type="text"
-          placeholder="Add your new task..."
-        />
-        {/* Add next + icon from next library */}
-        <button className="w-[8%] border border-black">+</button>
-      </div>
+      <AddTask onAdd={addTask} />
 
-      {tasks.map((task) => (
-        <Task text={task.text} key={task.id} />
-      ))}
+      {Object.values(tasks)
+        .reverse()
+        .map((task, index) => (
+          <Task
+            text={task.text}
+            key={index}
+            id={task.id}
+            onDelete={() => deleteTask(task.id)}
+          />
+        ))}
     </div>
   );
 };

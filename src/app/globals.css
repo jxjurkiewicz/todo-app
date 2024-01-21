@@ -16,5 +16,17 @@ body {
 }
 
 body * {
-  @apply ease-in-out duration-300;
+  @apply ease-in-out duration-300 font-poppins;
+}
+
+#add-form button:hover .icon-add {
+  @apply text-white;
+}
+
+.task:nth-of-type(even) {
+  @apply bg-blue-100;
+}
+
+.task:nth-of-type(odd) {
+  @apply bg-gray-100;
 }
