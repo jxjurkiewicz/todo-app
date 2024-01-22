@@ -37,7 +37,6 @@ const AddTask = ({ onAdd }) => {
           type="text"
           placeholder="Add your new task..."
         />
-        {/* Add next + icon from next library */}
         <button
           type="submit"
           className="w-[8%] border-2 border-green-600 cursor-pointer flex justify-center items-center rounded-xl hover:bg-green-600 shadow-md"
