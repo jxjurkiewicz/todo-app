@@ -30,3 +30,7 @@ body * {
 .task:nth-of-type(odd) {
   @apply bg-gray-100;
 }
+
+.delete-task:hover .delete-task-icon {
+  @apply text-black;
+}

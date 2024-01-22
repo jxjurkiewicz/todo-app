@@ -72,6 +72,7 @@ const App = () => {
         .map((task, index) => (
           <Task
             text={task.text}
+            date={task.date}
             key={index}
             id={task.id}
             onDelete={() => deleteTask(task.id)}
