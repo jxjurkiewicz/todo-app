@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { IoAdd } from "react-icons/io5";
 import dayjs from "dayjs";
+import "dayjs/locale/en";
 
 const AddTask = ({ onAdd }) => {
   const [text, setText] = useState("");
@@ -29,7 +30,7 @@ const AddTask = ({ onAdd }) => {
   };
 
   return (
-    <form id="add-form" onSubmit={onSubmit}>
+    <form id="add-form" onSubmit={onSubmit} className="pl-8">
       <div className="flex gap-4 mb-5">
         <input
           id="inputTask"
@@ -37,22 +38,22 @@ const AddTask = ({ onAdd }) => {
           onChange={(e) => {
             setText(e.target.value);
           }}
-          className="border-2 border-black border-opacity-30 rounded-xl w-[92%] p-4 shadow-lg"
+          className="border-2 border-black border-opacity-30 rounded-xl p-4 shadow-lg flex-grow min-w-0"
           type="text"
           placeholder="Add your new task..."
         />
         <button
           type="submit"
-          className="w-[8%] border-2 border-green-600 cursor-pointer flex justify-center items-center rounded-xl hover:bg-green-600 shadow-md"
+          className="w-[60px] min-w-[60px] border-2 border-green-600 cursor-pointer hidden justify-center items-center rounded-xl hover:bg-green-600 shadow-md sm:flex"
         >
           <IoAdd className="icon-add w-10 h-10 text-green-600" />
         </button>
       </div>
-      <div className="flex justify-start gap-5 mb-10">
+      <div className="flex justify-start gap-5 mb-5">
         <div>
           {/* <label htmlFor="dateInput">Date:</label> */}
           <input
-            className="border-2 border-black border-opacity-30 rounded-xl p-3 shadow-lg"
+            className={`border-2 border-black border-opacity-30 rounded-xl p-3 shadow-lg`}
             type="date"
             id="dateInput"
             value={date}
@@ -60,16 +61,22 @@ const AddTask = ({ onAdd }) => {
           />
         </div>
 
-        <div className="flex items-center border-2 border-black border-opacity-30 rounded-xl p-3 shadow-lg">
-          <h2>Priority</h2>
-          <input
-            checked={priority}
-            onChange={() => setPriority(!priority)}
-            type="checkbox"
-            className="mx-2"
-          />
+        <div
+          onClick={() => setPriority(!priority)}
+          className={`flex items-center border-2 border-black border-opacity-30 rounded-xl p-3 shadow-lg cursor-pointer hover:border-red-500 ${
+            priority && "bg-red-500 border-red-500"
+          }`}
+        >
+          Priority
         </div>
       </div>
+
+      <button
+        type="submit"
+        className="w-full border-2 border-green-600 cursor-pointer flex justify-center items-center rounded-xl hover:bg-green-600 shadow-md sm:hidden mb-10 py-2"
+      >
+        <IoAdd className="icon-add w-10 h-10 text-green-600" />
+      </button>
     </form>
   );
 };

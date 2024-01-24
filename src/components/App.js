@@ -5,14 +5,22 @@ import Header from "./Header";
 import Task from "./Task";
 import AddTask from "./AddTask";
 
+import dayjs from "dayjs";
+import "dayjs/locale/en";
+import Loader from "./Loader/Loader";
+
 const App = () => {
   const [tasks, setTasks] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const getTasks = async () => {
-      const tasksFromApi = await fetchTasks();
-
-      setTasks(tasksFromApi);
+      try {
+        const tasksFromApi = await fetchTasks();
+        setTasks(tasksFromApi);
+      } finally {
+        setLoading(false);
+      }
     };
 
     getTasks();
@@ -62,22 +70,27 @@ const App = () => {
   };
 
   return (
-    <div className="bg-white p-5 max-w-3xl mx-auto rounded-lg min-h-52 shadow-xl">
+    <div className="bg-white py-5 pl-3 pr-8 max-w-3xl mx-auto rounded-lg min-h-52 shadow-xl">
       <Header />
 
       <AddTask onAdd={addTask} />
 
-      {Object.values(tasks)
-        .reverse()
-        .map((task, index) => (
-          <Task
-            text={task.text}
-            date={task.date}
-            key={index}
-            id={task.id}
-            onDelete={() => deleteTask(task.id)}
-          />
-        ))}
+      {loading ? (
+        <Loader />
+      ) : (
+        Object.values(tasks)
+          .reverse()
+          .map((task, index) => (
+            <Task
+              text={task.text}
+              date={dayjs(task.date).format("DD-MM-YYYY")}
+              priority={task.priority}
+              key={index}
+              id={task.id}
+              onDelete={() => deleteTask(task.id)}
+            />
+          ))
+      )}
     </div>
   );
 };

@@ -4,7 +4,7 @@ export default function Header() {
       <h1 className="text-7xl font-kanit text-center tracking-wide text-blue-950">
         To-do App
       </h1>
-      <p className="text-right italic font-light">plan your day efficiency</p>
+      <p className="text-right italic font-light">plan your time efficiency</p>
     </header>
   );
 }

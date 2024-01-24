@@ -34,3 +34,7 @@ body * {
 .delete-task:hover .delete-task-icon {
   @apply text-black;
 }
+
+a:hover {
+  @apply text-[#042f56];
+}
