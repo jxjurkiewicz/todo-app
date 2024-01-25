@@ -3,7 +3,7 @@ import { FaExclamationCircle } from "react-icons/fa";
 
 export default function Task({ text, date, onDelete, priority }) {
   return (
-    <div className="flex justify-between items-start">
+    <div className="task flex justify-between items-start">
       {priority ? (
         <div className="mr-3 mt-3">
           <FaExclamationCircle className="w-5 h-5 text-red-500" />
@@ -11,7 +11,7 @@ export default function Task({ text, date, onDelete, priority }) {
       ) : (
         <div className="mr-3 w-5"></div>
       )}
-      <div className="task text-sm rounded-md shadow-xl py-2 mb-4 flex justify-between items-start flex-1 px-4 w-full">
+      <div className="task-content text-sm rounded-md shadow-xl py-2 mb-4 flex justify-between items-start flex-1 px-4 w-full">
         <div>
           <div className="text-black text-opacity-70 text-[11px] italic">{date}</div>
           <div className="">{text}</div>

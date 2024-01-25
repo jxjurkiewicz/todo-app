@@ -23,11 +23,11 @@ body * {
   @apply text-white;
 }
 
-.task:nth-of-type(even) {
+.task:nth-of-type(even) > .task-content {
   @apply bg-blue-100;
 }
 
-.task:nth-of-type(odd) {
+.task:nth-of-type(odd) > .task-content {
   @apply bg-gray-100;
 }
 

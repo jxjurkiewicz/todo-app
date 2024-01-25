@@ -68,15 +68,18 @@ const App = () => {
 
     setTasks(updatedTasks);
   };
-
   return (
-    <div className="bg-white py-5 pl-3 pr-8 max-w-3xl mx-auto rounded-lg min-h-52 shadow-xl">
+    <div className="bg-white py-8 pl-1 pr-6 md:pl-3 md:pr-8 max-w-3xl mx-auto rounded-lg min-h-52 shadow-xl">
       <Header />
 
       <AddTask onAdd={addTask} />
 
       {loading ? (
         <Loader />
+      ) : tasks === null ? (
+        <div className="text-center py-14 text-xl italic text-red-700">
+          No tasks assigned.
+        </div>
       ) : (
         Object.values(tasks)
           .reverse()

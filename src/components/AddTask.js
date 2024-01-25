@@ -50,10 +50,9 @@ const AddTask = ({ onAdd }) => {
         </button>
       </div>
       <div className="flex justify-start gap-5 mb-5">
-        <div>
-          {/* <label htmlFor="dateInput">Date:</label> */}
+        <div className="w-1/2 sm:w-auto">
           <input
-            className={`border-2 border-black border-opacity-30 rounded-xl p-3 shadow-lg`}
+            className={`border-2 border-black border-opacity-30 rounded-xl p-3 shadow-lg w-full text-center`}
             type="date"
             id="dateInput"
             value={date}
@@ -63,7 +62,7 @@ const AddTask = ({ onAdd }) => {
 
         <div
           onClick={() => setPriority(!priority)}
-          className={`flex items-center border-2 border-black border-opacity-30 rounded-xl p-3 shadow-lg cursor-pointer hover:border-red-500 ${
+          className={`w-1/2 sm:w-auto sm:min-w-32 flex justify-center items-center border-2 border-black border-opacity-30 rounded-xl p-3 shadow-lg cursor-pointer hover:border-red-500 ${
             priority && "bg-red-500 border-red-500"
           }`}
         >
